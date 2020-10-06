@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ContentChild} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  serverElements = [{type: '', name: 'string', content: 'string'}];
+  serverElements = [{type: 'server', name: 'TestServer', content: 'Just a Test'}];
+
   onServerAdded(serverData: {serverName: string, serverContent: string}) {
     this.serverElements.push({
       type: 'server',
@@ -21,5 +22,14 @@ export class AppComponent {
       name: serverData.serverName,
       content: serverData.serverContent
     });
+  }
+
+  onChangeFirst() {
+    this.serverElements[0].name = 'Changed!';
+  }
+
+  onDestroyFirst() {
+    this.serverElements.splice(0, 1);
+
   }
 }
