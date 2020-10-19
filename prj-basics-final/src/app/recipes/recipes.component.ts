@@ -10,8 +10,6 @@ export class RecipesComponent implements OnInit {
   @Input() recipeComponent: Recipe;
   constructor() {
   }
-
   ngOnInit() {
   }
-
 }
