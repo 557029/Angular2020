@@ -19,5 +19,12 @@
     <div *appUnless="onlyOdd">
       <p>Only Odd!</p>
     </div>
+    <div [ngSwitch]="5">
+      <p *ngSwitchCase="5">5</p>
+      <p *ngSwitchCase="10">10</p>
+      <p *ngSwitchCase="15">15</p>
+      <p *ngSwitchCase="20">20</p>
+      <p *ngSwitchDefault>default Value</p>
+    </div>
   </div>
 </div>
