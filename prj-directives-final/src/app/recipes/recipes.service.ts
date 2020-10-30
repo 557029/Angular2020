@@ -8,6 +8,7 @@ export class RecipesService {
    selectedRecipe = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'A Test Recipe',
       'This is simply a test',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
@@ -17,6 +18,7 @@ export class RecipesService {
         new Ingredient('flour', 50)
       ]),
     new Recipe(
+      2,
       'Another Test Recipe',
       'This is simply a test',
       'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg',
@@ -28,6 +30,10 @@ export class RecipesService {
 
   getRecipes(): Recipe[] {
     return this.recipes.slice();
+  }
+
+  getRecipe(id: number): Recipe {
+    return this.recipes[id];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
