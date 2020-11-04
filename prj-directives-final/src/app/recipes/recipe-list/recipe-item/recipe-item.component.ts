@@ -11,21 +11,10 @@ import {ActivatedRoute, Data, Router} from '@angular/router';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
+  @Input() index: number;
   // @Output() recipeSelected = new EventEmitter<void>();
-
-  constructor(private recipesService: RecipesService, private route: ActivatedRoute) { }
-
   ngOnInit() {
     // this.recipe = this.recipesService.selectedRecipe;
-  }
-
-  onSelected() {
-    this.route.data.subscribe((data: Data) => {
-      const id = data['id'];
-      this.recipe = this.recipesService.getRecipe(id);
-    });
-    // this.recipesService.selectedRecipe.emit(this.recipe);
-    // this.recipeSelected.emit();
   }
 
 }
