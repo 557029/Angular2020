@@ -1,6 +1,47 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div id="address-data" ngModelGroup="addressData" #addressData='ngModelGroup'>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              ngModel
+              required
+              email
+              #email="ngModel"
+            >
+            <span class="help-block" *ngIf="!email.valid && email.touched">Email is invalid</span>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   name="password"
+                   ngModel
+                   required
+                   #password="ngModel"
+            >
+            <p *ngIf="!password.valid && password.touched">password is invalid</p>
+          </div>
+          <div class="form-group">
+            <label for="subscription">Subscription</label>
+            <select class="form-control"
+                    id="subscription"
+                    name="subscription"
+                    [ngModel]="defaultSubscription">
+              <option *ngFor="let subscr of subscriptionTypes" value="{{subscr}}">{{subscr}}</option>
+            </select>
+          </div>
+        </div>
+        <p *ngIf="!f.valid && f.touched">Form is invalid!</p>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+      </form>
       <!-- Add a Form with the following Inputs (and Validators)
            1) Mail address (should not be empty and should be an email address)
            2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
