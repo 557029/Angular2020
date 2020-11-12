@@ -1,6 +1,51 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="projectData">
+          <div class="form-group">
+            <label for="projectName">Project Name:</label>
+            <input type="text"
+                   id="projectName"
+                   formControlName="projectName"
+                   name="projectName"
+                   class="form-control">
+            <span class="help-block" *ngIf="projectForm.get('projectData.projectName').touched && !projectForm.get('projectData.projectName').valid">
+              <span *ngIf="projectForm.get('projectData.projectName').errors['projectIsForbidden']">
+                Project name is invalid!
+              </span>
+              <span *ngIf="projectForm.get('projectData.projectName').hasError('required')">
+                Project name is required!
+              </span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="projectEmail">email:</label>
+            <input type="email"
+                   id="projectEmail"
+                   formControlName="projectEmail"
+                   name="projectEmail"
+                   class="form-control">
+            <span class="help-block" *ngIf="projectForm.get('projectData.projectEmail').touched && !projectForm.get('projectData.projectEmail').valid">
+              <span *ngIf="projectForm.get('projectData.projectEmail').hasError('emailIsForbidden')">Forbidden email address!</span>
+              <span *ngIf="projectForm.get('projectData.projectEmail').hasError('required')">Email address is required!</span>
+              <span *ngIf="projectForm.get('projectData.projectEmail').hasError('email')">Wrong email address!</span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="projectStatus">Status</label>
+          <select class="form-control"
+                  id="projectStatus"
+                  formControlName="projectStatus">
+            <option *ngFor="let status of projectStatuses"
+                    [value]="status">{{status}}
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
       <!--
           Create a Form with the following Controls and Validators
           1) Project Name (should not be empty)
