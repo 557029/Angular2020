@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="recipeForm" >
       <div class="row">
         <div class="col-xs-12">
           <button type="submit"
                   class="btn btn-success"
-                  (click)="onSave()"
+                  (click)="onSubmit()"
                   [disabled]="!recipeForm.valid"
           >Save</button>
           <button type="button" class="btn btn-default">Cancel</button>
