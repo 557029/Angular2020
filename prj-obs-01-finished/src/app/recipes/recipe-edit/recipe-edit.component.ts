@@ -64,7 +64,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   get controls() { // a getter!
-    return (<FormArray>this.recipeForm.get('ingredients')).controls;
+    return (<FormArray> this.recipeForm.get('ingredients')).controls;
   }
 
   onAddIngredient() {
@@ -85,7 +85,7 @@ export class RecipeEditComponent implements OnInit {
 
 
   onDeleteIngredirent(index: number) {
-    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+    (<FormArray> this.recipeForm.get('ingredients')).removeAt(index);
 
   }
 
