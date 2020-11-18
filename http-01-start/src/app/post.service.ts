@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpEventType, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Post} from './post.model';
-import {map, catchError} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {Subject, throwError} from 'rxjs';
 
 @Injectable({
@@ -16,11 +16,22 @@ export class PostService {
   createAndStorePost(tlt: string, contenst: string) {
     const postData: Post = ({title: tlt, content: contenst});
     return this.http.post<{name: string}>('https://ng-complete-class.firebaseio.com/posts.json',
-      postData);
+      postData, {
+        observe: 'response'
+      });
   }
 
   fetchPost() {
-    return this.http.get<{[key: string]: Post}>('https://ng-complete-class.firebaseio.com/posts.json')
+    // let searchParams = new HttpParams();
+    // searchParams.append('print', 'pretty');
+
+    return this.http.get<{[key: string]: Post}>('https://ng-complete-class.firebaseio.com/posts.json',
+      {
+        headers: new HttpHeaders({'Custom-header': 'Hello'}),
+        params: new HttpParams().set('print', 'pretty') // this id like url.../post.json?print=pretty
+        // params: searchParams
+      }
+      )
       .pipe(map((responseData: {[key: string]: Post}) => {
         const postArray = [];
         for (const key in responseData) {
@@ -37,7 +48,15 @@ export class PostService {
   }
 
   deletePost() {
-    return this.http.delete<{[key: string]: Post}>('https://ng-complete-class.firebaseio.com/posts.json');
+    return this.http.delete<{[key: string]: Post}>('https://ng-complete-class.firebaseio.com/posts.json',{
+      observe: 'events',
+      responseType: 'json'
+    }).pipe(tap(event => {
+      console.log(event);
+      if (event.type === HttpEventType.Response) {
+        console.log(event.body);
+      }
+    }));
   }
 
 }
