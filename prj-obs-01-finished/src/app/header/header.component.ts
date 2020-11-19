@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {DataStorageService} from '../shared/data-storage.service';
+import {Recipe} from '../recipes/recipe.model';
+import {map} from 'rxjs/operators';
+import {RecipeService} from '../recipes/recipe.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +16,6 @@ export class HeaderComponent {
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes();
+    this.dataStorageService.fetchRecipes().subscribe();
   }
 }
