@@ -28,6 +28,11 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
+  get controls() { // a getter!
+    return (<FormArray> this.recipeForm.get('ingredients')).controls;
+  }
+
+
   onSubmit() {
     // const newRecipe = new Recipe(
     //   this.recipeForm.value['name'],
