@@ -16,7 +16,7 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
-  private projectWebKey = 'AIzaSyDJUhhRFLOr5Q5i8UXmsN99dHEL9sDwpvg';
+  private projectWebKey = '***';
   constructor(private http: HttpClient) {
   }
   signup(email: string, password: string) {
