@@ -1,4 +1,4 @@
-import {Component, ComponentFactory, ComponentFactoryResolver, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnDestroy, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthResponseData, AuthService} from './auth-service';
 import {Observable, Subscription} from 'rxjs';
