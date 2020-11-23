@@ -19,7 +19,7 @@ export interface AuthResponseData {
 })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-  private projectWebKey = '****';
+  private projectWebKey = 'AIzaSyDJUhhRFLOr5Q5i8UXmsN99dHEL9sDwpvg';
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {
