@@ -19,6 +19,7 @@ export class AuthComponent implements OnInit, OnDestroy{
   error: string = null;
   @ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
   private closeSub: Subscription;
+  private storeSub: Subscription;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -36,15 +37,15 @@ export class AuthComponent implements OnInit, OnDestroy{
     }
     // SignUp should be available only when LoginMode = false
     //
-    const email = authForm.value.email;
-    const password = authForm.value.password;
+    const sEmail = authForm.value.email;
+    const sPassword = authForm.value.password;
     // let authObs: Observable<AuthResponseData>;
     // this.isLoaging = true;
     if (this.isLoginMode) {
       // authObs = this.authService.login(email, password);
-      this.store.dispatch(new AuthAction.LoginStart({email: email, password: password}));
+      this.store.dispatch(new AuthAction.LoginStart({email: sEmail, password: sPassword}));
     } else {
-      this.store.dispatch(new AuthAction.SignUpStart({email: email, password: password}));
+      this.store.dispatch(new AuthAction.SignUpStart({email: sEmail, password: sPassword}));
       // authObs = this.authService.signup(email, password);
       //   .subscribe(responseData => {
       //     console.log(responseData);
@@ -70,7 +71,8 @@ export class AuthComponent implements OnInit, OnDestroy{
   }
 
   onHandleError(){
-    this.error = null;
+    this.store.dispatch(new AuthAction.ClearErrors());
+    // this.error = null;
   }
 
   private showErrorAlert(message: string) {
@@ -86,7 +88,7 @@ export class AuthComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.store.select('auth').subscribe(authState => {
+    this.storeSub = this.store.select('auth').subscribe(authState => {
       this.isLoaging = authState.loading;
       this.error = authState.authError;
       if (this.error) {
@@ -98,6 +100,9 @@ export class AuthComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     // Make sure we'll unsubscribe closeSub property.
     //
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
+    }
     if (this.closeSub) {
       this.closeSub.unsubscribe();
     }
