@@ -59,7 +59,7 @@ export class AuthService {
     return this.http
       .post<AuthResponseData>(
         'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' +
-          environment.firebaseAPIKey,
+        environment.firebaseAPIKey,
         {
           email: email,
           password: password,
