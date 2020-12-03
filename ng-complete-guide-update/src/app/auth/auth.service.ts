@@ -104,7 +104,8 @@ export class AuthService {
           email: loadedUser.email,
           userId: loadedUser.id,
           token: loadedUser.token,
-          expirationDate: new Date(userData._tokenExpirationDate)
+          expirationDate: new Date(userData._tokenExpirationDate),
+          redirect: false
         })
       );
       const expirationDuration =
@@ -145,7 +146,8 @@ export class AuthService {
         email: email,
         userId: userId,
         token: token,
-        expirationDate: expirationDate
+        expirationDate: expirationDate,
+        redirect: false
       })
     );
     this.autoLogout(expiresIn * 1000);
